@@ -29,7 +29,7 @@ std::vector<std::streampos> splitFilePos(const std::string &fileName, std::size_
     if (!partNumbs)
         partNumbs = 1;
     auto partSize = fileSize % partNumbs ? fileSize / partNumbs + 1 : fileSize / partNumbs;
-    auto pos = partSize;
+    std::streampos pos = partSize;
 
     if (fileSize)
     {
@@ -41,6 +41,11 @@ std::vector<std::streampos> splitFilePos(const std::string &fileName, std::size_
             file.seekg(pos, std::ios::beg);
             std::getline(file, line);
             pos = file.tellg();
+            if (pos < 0)
+            {
+                partsPos.emplace_back(fileSize);
+                break;
+            }
             pos += partSize;
             if (pos < fileSize)
                 partsPos.emplace_back(pos);

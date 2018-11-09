@@ -52,3 +52,17 @@ TEST(SplitFilePos_TEST, SplitFilePos_Test_on_empty)
     ASSERT_THAT(tmp_vec.size(), 1);
     ASSERT_THAT(tmp_vec.at(0), 0);
 }
+
+TEST(SplitFilePos_TEST, SplitFilePos_Test_on_small_file)
+{
+    std::vector<std::streampos> tmp_vec;
+    std::vector<std::streampos> result_vec{0, 20};
+    std::string f_name = "one_address.txt";
+    std::size_t parts = 12;
+    tmp_vec = splitFilePos(f_name, parts);
+    ASSERT_THAT(tmp_vec.size(), 2);
+    for (auto i = 0; i < tmp_vec.size(); ++i)
+    {
+        ASSERT_THAT(tmp_vec.at(i), result_vec.at(i));
+    }
+}
