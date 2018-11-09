@@ -21,7 +21,9 @@ target_link_libraries(${MY_PROJECT_NAME} ${CMAKE_THREAD_LIBS_INIT})
 
 set(BUILD_TEST ON)
 if(${BUILD_TEST})
-configure_file("${PROJECT_SOURCE_DIR}/${SRC_DIR}/addresses.txt" "${PROJECT_BINARY_DIR}/tests/addresses.txt" COPYONLY)
+configure_file("${PROJECT_SOURCE_DIR}/${SRC_DIR}/tests/addresses.txt" "${PROJECT_BINARY_DIR}/tests/addresses.txt" COPYONLY)
+configure_file("${PROJECT_SOURCE_DIR}/${SRC_DIR}/tests/addr_empty.txt" "${PROJECT_BINARY_DIR}/tests/addr_empty.txt" COPYONLY)
+
 enable_testing()
 include_directories(./)
 add_subdirectory(tests)
